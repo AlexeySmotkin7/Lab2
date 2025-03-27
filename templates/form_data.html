@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Данные формы{% endblock %}
+
+{% block content %}
+<h2>Данные формы</h2>
+
+<div class="card mb-4">
+    <div class="card-header">Отправить форму</div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('form_data') }}">
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Введите имя">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Введите email">
+            </div>
+            <div class="form-group">
+                <label for="message">Сообщение</label>
+                <textarea class="form-control" id="message" name="message" rows="3" placeholder="Введите сообщение"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+</div>
+
+{% if form_params %}
+<div class="card">
+    <div class="card-header">Полученные данные формы</div>
+    <div class="card-body">
+        <ul class="list-group">
+            {% for key, value in form_params.items() %}
+                <li class="list-group-item">{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

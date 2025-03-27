@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Flask Web App</h1>
+    <p class="lead">Выберите раздел из меню выше.</p>
+    <hr class="my-4">
+    <div class="list-group">
+        <a href="{{ url_for('request_info') }}" class="list-group-item list-group-item-action">Информация о запросе</a>
+        <a href="{{ url_for('form_data') }}" class="list-group-item list-group-item-action">Данные формы</a>
+        <a href="{{ url_for('phone_validator') }}" class="list-group-item list-group-item-action">Валидатор телефона</a>
+    </div>
+</div>
+{% endblock %}

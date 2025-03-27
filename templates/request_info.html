@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Информация о запросе{% endblock %}
+
+{% block content %}
+<h2>Информация о запросе</h2>
+
+<div class="card mb-4">
+    <div class="card-header">Параметры URL</div>
+    <div class="card-body">
+        {% if url_params %}
+            <ul class="list-group">
+                {% for key, value in url_params.items() %}
+                    <li class="list-group-item">{{ key }}: {{ value }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="card-text">Нет параметров URL</p>
+            <p><small>Добавьте параметры в URL, например: <code>?name=John&age=25</code></small></p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">Заголовки запроса</div>
+    <div class="card-body">
+        <ul class="list-group">
+            {% for key, value in headers.items() %}
+                <li class="list-group-item">{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">Cookies</div>
+    <div class="card-body">
+        {% if cookies %}
+            <ul class="list-group">
+                {% for key, value in cookies.items() %}
+                    <li class="list-group-item">{{ key }}: {{ value }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="card-text">Нет cookies</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

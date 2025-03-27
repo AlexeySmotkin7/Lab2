@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Валидатор телефона{% endblock %}
+
+{% block content %}
+<h2>Валидатор номера телефона</h2>
+
+<div class="card mb-4">
+    <div class="card-header">Введите номер телефона</div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('phone_validator') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="phone">{{ form.phone.label }}</label>
+                {{ form.phone(class="form-control " + ("is-invalid" if "phone" in errors else ""), id="phone", placeholder="Введите номер телефона") }}
+                {% if "phone" in errors %}
+                <div class="invalid-feedback">
+                    {{ errors["phone"] }}
+                </div>
+                {% endif %}
+                <small class="form-text text-muted">
+                    Примеры форматов: +7 (123) 456-75-90, 8(123)4567590, 123.456.75.90
+                </small>
+            </div>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+</div>
+
+{% if formatted_phone %}
+<div class="alert alert-success" role="alert">
+    Номер телефона успешно проверен!
+    <br>
+    Форматированный номер: <strong>{{ formatted_phone }}</strong>
+</div>
+{% endif %}
+{% endblock %}
